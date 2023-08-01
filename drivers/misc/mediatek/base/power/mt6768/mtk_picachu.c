@@ -104,7 +104,7 @@
 
 #define PROC_ENTRY(name)	{__stringify(name), &name ## _proc_fops}
 
-#define PICACHU_PROC_ENTRY_ATTR (0664)
+#define PICACHU_PROC_ENTRY_ATTR (0440)
 
 struct picachu_info {
 	union {
@@ -199,9 +199,18 @@ static void picachu_apply_efuse_to_eem(enum mt_picachu_vproc_id id,
 
 	for (i = 0; i < NR_EEM_EFUSE_PER_VPROC; i++, array_idx++) {
 
-		
-		
+		if (p->pi_dvtfixed == PICACHU_DVTFIXED_V1 ||
+			p->pi_dvtfixed == PICACHU_DVTFIXED_V2) {
 
+			eem_set_pi_dvtfixed(*(ctrl_id + array_idx),
+							p->pi_dvtfixed);
+		}
+
+		if (!p->ptp1_efuse[i] || *(ctrl_id + array_idx) == -1)
+			continue;
+
+		eem_set_pi_efuse(*(ctrl_id + array_idx),
+				p->ptp1_efuse[i], p->loo_enabled);
 	}
 }
 
@@ -356,4 +365,3 @@ subsys_initcall(picachu_init);
 
 MODULE_DESCRIPTION("MediaTek Picachu Driver v0.1");
 MODULE_LICENSE("GPL");
-
