@@ -1,9 +1,13 @@
 echo Script build kernel ARM64 suport host arcitecture  AMD64 & X86_64.
 
 #download toolchains
-git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
-git clone --depth=1 https://github.com/EternalX-project/aarch64-linux-gnu.git aarch64-gcc
-git clone --depth=1 https://github.com/EternalX-project/arm-linux-gnueabi.git aarch32-gcc
+wget https://github.com/ZyCromerZ/Clang/releases/download/14.0.6-20230213-release/Clang-14.0.6-20230213.tar.gz
+mkdir zyc
+mv Clang-14.0.6-20230213.tar.gz zyc
+cd zyc
+tar -zxvf Clang-14.0.6-20230213.tar.gzaq
+cd ..
+
 
 #membersihkan
 echo sabar lagi persiapan
@@ -26,7 +30,7 @@ export LOCALVERSION=hehehhehe
 
 make O=out ARCH=arm64 ucip_defconfig
 
-    PATH="$HOME/tools/zyclang14/bin:${PATH}" \
+    PATH="zyc/bin:${PATH}" \
       make -j$(nproc --all) O=out \
       ARCH=arm64 \
       LD=ld.lld \
