@@ -1,13 +1,12 @@
 echo Script build kernel ARM64 suport host arcitecture  AMD64 & X86_64.
 
 #download toolchains
-wget https://github.com/ZyCromerZ/Clang/releases/download/14.0.6-20230213-release/Clang-14.0.6-20230213.tar.gz
-mkdir zyc
-mv Clang-14.0.6-20230213.tar.gz zyc
-cd zyc
-tar -zxvf Clang-14.0.6-20230213.tar.gzaq
+wget https://github.com/Manusiamars123/liquid_kernel_realme_even/releases/download/clang/ipongclang.zip
+mkdir ipongclang
+mv ipongclang.zip ipongclang
+cd ipongclang
+unzip ipongclang.zip
 cd ..
-
 
 #membersihkan
 echo sabar lagi persiapan
@@ -30,7 +29,7 @@ export LOCALVERSION=hehehhehe
 
 make O=out ARCH=arm64 ucip_defconfig
 
-    PATH="zyc/bin:${PATH}" \
+    PATH="ipongclang/bin:${PATH}" \
       make -j$(nproc --all) O=out \
       ARCH=arm64 \
       LD=ld.lld \
