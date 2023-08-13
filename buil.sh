@@ -2,11 +2,7 @@ echo Script build kernel ARM64 suport host arcitecture  AMD64 & X86_64.
 
 #download toolchains
 wget https://github.com/Manusiamars123/liquid_kernel_realme_even/releases/download/clang/ipongclang.zip
-mkdir ipongclang
-mv ipongclang.zip ipongclang
-cd ipongclang
 unzip ipongclang.zip
-cd ..
 
 #membersihkan
 echo sabar lagi persiapan
@@ -29,12 +25,9 @@ export LOCALVERSION=hehehhehe
 
 make O=out ARCH=arm64 even_kvm_defconfig
 
-    PATH="ipongclang/bin:${PATH}" \
+    PATH="ipongclang/clang-ipong/bin:${PATH}" \
       make -j$(nproc --all) O=out \
       ARCH=arm64 \
-      LD=ld.lld \
-      NM=llvm-nm \
-      AR=llvm-ar \
       CC="clang" \
       CLANG_TRIPLE=aarch64-linux-gnu- \
       CROSS_COMPILE=aarch64-linux-gnu- \
