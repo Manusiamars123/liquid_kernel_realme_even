@@ -11,7 +11,7 @@ cd ..
 #membersihkan
 echo sabar lagi persiapan
 rm -rf out
-rm -rf HASIL/**
+rm -rf HASIL
 make mrproper
 echo persiapan selesai
 echo .
@@ -27,7 +27,7 @@ export LOCALVERSION=hehehhehe
 #mulai mengcompile kernel
 [ -d "out" ] && rm -rf out  mkdir -p out
 
-make O=out ARCH=arm64 ucip_defconfig
+make O=out ARCH=arm64 even_kvm_defconfig
 
     PATH="ipongclang/bin:${PATH}" \
       make -j$(nproc --all) O=out \
@@ -43,6 +43,7 @@ make O=out ARCH=arm64 ucip_defconfig
 V=0 2>&1 | tee log.txt
 
 #menarik file image.gz-dtb
+mkdir HASIL
 mv out/arch/arm64/boot/Image.gz-dtb HASIL/
 echo lagi nyarii...
 echo ketemu
